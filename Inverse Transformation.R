@@ -20,7 +20,7 @@ sapply(runif(10),
 sapply(runif(10),
        function(u){
          uniroot(f = function(x, mu=2, beta=3){1/(1+exp(-(x-mu)/beta))-u},
-           lower = -1e16, upper = 1e16)$root
+                 lower = -1e16, upper = 1e16)$root
        })
 
 ## 7. 產生10個Cauchy(2,3)的隨機值
@@ -44,4 +44,12 @@ f <- function(u){
 }
 sapply(runif(10),f)
 
+## 10. 產生10個(p1,p2,p3,p4) = (0.2,0.15,0.25,0.4), P(X = j) = Pj 的隨機值
+f <- function(r){
+  p <- c(0.2, 0.15, 0.25, 0.4)
+  .bincode(runif(r), c(0,cumsum(p)))
+}
+f(10)
+
+## 11. 產生10個Poisson(lambda)的隨機值
 
