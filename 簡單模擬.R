@@ -23,3 +23,10 @@ sample(5:15, 10, replace = TRUE)
 ## 5. 產生10個Bin(5, 0.3)的隨機值
 replicate(10, sum(runif(5) < 0.3))
 rbinom(10, 5, 0.3)
+
+## 6. 1~100的牌,"第i次的時候抽到i"記為1 hit,總共幾hit?
+f <- function(){
+  x <- sample.int(100,100)
+  return(sum(x == 1:100))
+}
+f()

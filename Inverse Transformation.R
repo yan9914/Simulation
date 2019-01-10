@@ -51,5 +51,57 @@ f <- function(r){
 }
 f(10)
 
-## 11. 產生10個Poisson(lambda)的隨機值
+## 11. 產生1個Bin(5,0.3)的隨機值
+f <- function(n,p){
+  u <- runif(1)
+  c <- p/(1-p)
+  i <- 0
+  pr <- (1-p)^n
+  F <- pr
+  while(u >= F){
+    pr <- c*(n-i)/(i+1)*pr
+    F <- F + pr
+    i <- i+1
+  }
+  return(i)
+}
+f(5,0.3)
+
+## 12. 產生1個Poisson(lambda=3)的隨機值
+f <- function(lambda){
+  u <- runif(1)
+  p <- exp(-lambda)
+  i <- 0
+  F <- p
+  while(u >= F){
+    p <- lambda*p/(i+1)
+    F <- F + p
+    i <- i+1
+  }
+  return(i)
+}
+f(3)
+
+## 13. 產生1個Geometric(0.3)的隨機值
+f <- function(p){
+  u <- runif(1)
+  return(ceiling(log(u)/log(1-p)))
+}
+f(0.3)
+
+## 14. 產生1個NB(5,0.3)的隨機值
+f <- function(r,p){
+  u <- runif(1)
+  pr <- p^r
+  i <- r
+  F <- pr
+  while(u >= F){
+    pr <- i*(1-p)/(i+1-r)*pr
+    F <- F + pr
+    i <- i+1
+  }
+  return(i)
+}
+f(5,0.3)
+
 
