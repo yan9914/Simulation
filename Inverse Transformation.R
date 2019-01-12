@@ -105,3 +105,50 @@ f <- function(r,p){
 f(5,0.3)
 
 
+## Composition Approach
+
+## 15. 產生1個p1=...=p5=0.05, p6=...=p10=0.15的隨機值
+f <- function(){
+  u1 <- runif(1)
+  u2 <- runif(1)
+  if (u1 < 0.5) return(ceiling(u2*10))
+  else          return(ceiling(u2*5)+5)
+}
+f()
+
+## 16. 產生1個p5=p7=...=p13=0.11, p6=p8=...=p14=0.09的隨機值
+f <- function(){
+  u1 <- runif(1)
+  u2 <- runif(1)
+  if (u1 < 0.55) return(ceiling(u2*5)*2+3)
+  else           return(ceiling(u2*5)*2+4)
+} # 定義域為等差數列的Uniform隨機值 : ceiling(U*個數)*間距+修正
+f()
+
+## 17. 產生1個p1~p10 = (0.06,0.06,0.06,0.06,0.06,0.15,0.13,0.14,0.15,0.13)的隨機值
+f <- function(){
+  u1 <- runif(1)
+  u2 <- runif(1)
+  if      (u1 < 0.6)  return(ceiling(u2*10))
+  else if (u1 < 0.78) return(ceiling(u2*2)*3+3)
+  else if (u1 < 0.92) return(ceiling(u2*2)*3+4)
+  else                return(8)
+}
+f()
+
+## 18. 產生下列服從pmf的隨機值
+#                                j-1
+#                1  j+1    1    2
+#   P(X = j) = ( — )   + ( — ) ————   , j = 1,2,...
+#                2         2     j
+#                               3
+f <- function(r){
+  u1 <- runif(r)
+  u2 <- runif(r)
+  v <- NULL
+  x <- .bincode(u1,c(0,0.5,1))
+  v[x==1] <- ceiling(log(u2[x==1])/log(1/2))
+  v[x==2] <- ceiling(log(u2[x==2])/log(2/3))
+  return(v)
+}
+f(10)
