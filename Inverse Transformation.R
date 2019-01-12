@@ -147,8 +147,8 @@ f <- function(r){
   u2 <- runif(r)
   v <- NULL
   x <- .bincode(u1,c(0,0.5,1))
-  v[x==1] <- ceiling(log(u2[x==1])/log(1/2))
-  v[x==2] <- ceiling(log(u2[x==2])/log(2/3))
+  v[x==1] <- ceiling(log(u2[x==1])/log(1/2))  # Geo(1/2)
+  v[x==2] <- ceiling(log(u2[x==2])/log(2/3))  # Geo(2/3)
   return(v)
 }
 f(10)
